@@ -7,8 +7,9 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0xm2m")
 
-[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
-position = Vector2(866, 551)
-
 [node name="Enemy" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(371, 553)
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(866, 551)
+collision_priority = 1.0

@@ -3,12 +3,14 @@ class_name Player extends Area2D
 @export var speed: int = 10
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+const TOTAL_HEALTH: int = 20
+var current_health: int = TOTAL_HEALTH
+
 var movement_direction: Vector2 = Vector2.ZERO
 var screen_size: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	pass
 	
 	
 func _process(_delta) -> void:
@@ -62,3 +64,13 @@ func get_direction_by_key_pressed() -> Vector2:
 		return Vector2.RIGHT
 	else:
 		return Vector2.ZERO
+
+
+func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
+	if body is not Enemy:
+		return
+	
+	var enemy: Enemy = body as Enemy
+	current_health -= enemy.damage_points
+
+	#TODO: check if player health reaches 0
