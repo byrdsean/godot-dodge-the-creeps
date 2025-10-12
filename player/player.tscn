@@ -37,7 +37,6 @@ radius = 56.0
 [node name="Player" type="Area2D"]
 collision_priority = 2.0
 script = ExtResource("1_qjkh3")
-speed = null
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

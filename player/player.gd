@@ -3,7 +3,7 @@ class_name Player extends Area2D
 @export var speed: int = 10
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-const TOTAL_HEALTH: int = 20
+const TOTAL_HEALTH: int = 10
 var current_health: int = TOTAL_HEALTH
 
 var movement_direction: Vector2 = Vector2.ZERO
