@@ -2,14 +2,28 @@
 
 [ext_resource type="Script" uid="uid://bsrai312cu0wy" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cyb2l4838vaan" path="res://player/player.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://d4daq83cgci6e" path="res://enemy/enemy.tscn" id="3_h2yge"]
+
+[sub_resource type="Curve2D" id="Curve2D_h2yge"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1918, 0, 0, 0, 0, 0, 1918, 1080, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0xm2m")
 
-[node name="Enemy" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(371, 553)
-
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
 position = Vector2(866, 551)
 collision_priority = 1.0
+
+[node name="GameBoundary" type="Path2D" parent="."]
+position = Vector2(2, 0)
+curve = SubResource("Curve2D_h2yge")
+
+[node name="BoundaryPath" type="PathFollow2D" parent="GameBoundary"]
+
+[node name="AddEnemyTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="AddEnemyTimer" to="." method="_on_add_enemy_timer_timeout"]
