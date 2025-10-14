@@ -8,12 +8,22 @@ var current_health: int = TOTAL_HEALTH
 
 var movement_direction: Vector2 = Vector2.ZERO
 var screen_size: Vector2 = Vector2.ZERO
+var starting_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
+	starting_position = position
+	
+	
+func reset() -> void:
+	current_health = TOTAL_HEALTH
+	position = starting_position
 	
 	
 func _process(_delta) -> void:
+	if current_health <= 0:
+		return
+	
 	movement_direction = get_direction_by_key_pressed()
 	if movement_direction == Vector2.ZERO:
 		set_player_idle()

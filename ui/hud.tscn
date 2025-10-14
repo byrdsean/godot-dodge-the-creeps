@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxo3tg64o4ko6"]
+
+[ext_resource type="Script" uid="uid://bunngum0marpt" path="res://ui/hud.gd" id="1_rbyyf"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_rbyyf")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 1916.0
+offset_bottom = 1081.0
+theme_override_font_sizes/font_size = 128
+text = "Dodge The Creeps!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Score" type="Label" parent="."]
+offset_right = 1929.0
+offset_bottom = 359.0
+theme_override_font_sizes/font_size = 128
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start Button" type="Button" parent="."]
+offset_left = 755.0
+offset_top = 805.0
+offset_right = 1260.0
+offset_bottom = 988.0
+theme_override_font_sizes/font_size = 128
+text = "Start!"
+
+[connection signal="button_down" from="Start Button" to="." method="_on_start_button_button_down"]
