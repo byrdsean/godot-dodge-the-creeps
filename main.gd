@@ -4,6 +4,7 @@ class_name Main extends Node2D
 @onready var enemy_scene: PackedScene = preload("res://enemy/enemy.tscn")
 @onready var add_enemy_timer : Timer =  $AddEnemyTimer
 @onready var player: Player = $Player
+@onready var hud: Hud = $Hud
 
 func _ready() -> void:
 	pass
@@ -37,5 +38,14 @@ func check_for_game_over() -> void:
 		return
 		
 	add_enemy_timer.stop()	
-	player.queue_free()
+	player.visible = false
 	get_tree().call_group("enemies", "queue_free")
+	hud.visible = true
+
+
+func _on_hud_start_game() -> void:
+	add_enemy_timer.start()
+	hud.visible = false
+	
+	player.reset()
+	player.visible = true
