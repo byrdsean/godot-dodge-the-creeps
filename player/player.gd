@@ -1,5 +1,7 @@
 class_name Player extends Area2D
 
+signal hit
+
 @export var speed: int = 10
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -18,7 +20,7 @@ func _ready() -> void:
 func reset() -> void:
 	current_health = TOTAL_HEALTH
 	position = starting_position
-	
+	emit_signal("hit", current_health)
 	
 func _process(_delta) -> void:
 	if current_health <= 0:
@@ -83,3 +85,5 @@ func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int
 	var enemy: Enemy = body as Enemy
 	current_health -= enemy.DAMAGE_POINTS
 	enemy.queue_free()
+	
+	emit_signal("hit", current_health)

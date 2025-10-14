@@ -7,7 +7,7 @@ class_name Main extends Node2D
 @onready var hud: Hud = $Hud
 
 func _ready() -> void:
-	pass
+	player.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -40,12 +40,10 @@ func check_for_game_over() -> void:
 	add_enemy_timer.stop()	
 	player.visible = false
 	get_tree().call_group("enemies", "queue_free")
-	hud.visible = true
+	hud.reset()
 
 
 func _on_hud_start_game() -> void:
 	add_enemy_timer.start()
-	hud.visible = false
-	
 	player.reset()
 	player.visible = true
