@@ -28,5 +28,6 @@ wait_time = 0.5
 
 [node name="Hud" parent="." instance=ExtResource("3_h2yge")]
 
+[connection signal="hit" from="Player" to="Hud" method="_on_player_hit"]
 [connection signal="timeout" from="AddEnemyTimer" to="." method="_on_add_enemy_timer_timeout"]
 [connection signal="start_game" from="Hud" to="." method="_on_hud_start_game"]
