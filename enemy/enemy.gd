@@ -4,10 +4,8 @@ class_name Enemy extends RigidBody2D
 
 const MIN_SPEED: int = 250
 const MAX_SPEED: int = 350
-const MIN_DAMAGE = 1
-const MAX_DAMAGE = 5
 
-var damage_points: int = randi_range(MIN_DAMAGE, MAX_DAMAGE)
+const DAMAGE_POINTS: int = 1
 
 func _ready() -> void:
 	set_velocity()

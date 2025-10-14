@@ -3,13 +3,14 @@ class_name Main extends Node2D
 @onready var boundary : PathFollow2D = $GameBoundary/BoundaryPath
 @onready var enemy_scene: PackedScene = preload("res://enemy/enemy.tscn")
 @onready var add_enemy_timer : Timer =  $AddEnemyTimer
+@onready var player: Player = $Player
 
 func _ready() -> void:
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	check_for_game_over()
 
 
 func set_random_rotation() -> float:
@@ -29,3 +30,12 @@ func _on_add_enemy_timer_timeout() -> void:
 	enemy.rotation = enemy_rotation
 	
 	add_child(enemy)
+
+
+func check_for_game_over() -> void:
+	if !player || player.current_health > 0:
+		return
+		
+	add_enemy_timer.stop()	
+	player.queue_free()
+	get_tree().call_group("enemies", "queue_free")

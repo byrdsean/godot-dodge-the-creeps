@@ -71,6 +71,5 @@ func _on_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int
 		return
 	
 	var enemy: Enemy = body as Enemy
-	current_health -= enemy.damage_points
-
-	#TODO: check if player health reaches 0
+	current_health -= enemy.DAMAGE_POINTS
+	enemy.queue_free()
