@@ -5,9 +5,12 @@ class_name Main extends Node2D
 @onready var add_enemy_timer : Timer =  $AddEnemyTimer
 @onready var player: Player = $Player
 @onready var hud: Hud = $Hud
+@onready var bg_music: AudioStreamPlayer = $BackgroundMusic
+@onready var game_over_music: AudioStreamPlayer = $GameOverMusic
 
 func _ready() -> void:
 	player.visible = false
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -41,9 +44,17 @@ func check_for_game_over() -> void:
 	player.visible = false
 	get_tree().call_group("enemies", "queue_free")
 	hud.reset()
+	bg_music.stop()
+	#game_over_music.play()
 
 
 func _on_hud_start_game() -> void:
 	add_enemy_timer.start()
 	player.reset()
 	player.visible = true
+	bg_music.play()
+	#game_over_music.stop()
+
+
+func _on_background_music_finished() -> void:
+	bg_music.play()

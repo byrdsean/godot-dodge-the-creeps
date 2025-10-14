@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://x2fnapkv4o1j"]
+[gd_scene load_steps=7 format=3 uid="uid://x2fnapkv4o1j"]
 
 [ext_resource type="Script" uid="uid://bsrai312cu0wy" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cyb2l4838vaan" path="res://player/player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cxo3tg64o4ko6" path="res://ui/hud.tscn" id="3_h2yge"]
+[ext_resource type="AudioStream" uid="uid://0iuoyumu07yb" path="res://audio/House In a Forest Loop.ogg" id="4_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://x7wudxvsq6i5" path="res://audio/gameover.wav" id="5_lquwl"]
 
 [sub_resource type="Curve2D" id="Curve2D_h2yge"]
 _data = {
@@ -28,6 +30,13 @@ wait_time = 0.5
 
 [node name="Hud" parent="." instance=ExtResource("3_h2yge")]
 
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1bvp3")
+
+[node name="GameOverMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lquwl")
+
 [connection signal="hit" from="Player" to="Hud" method="_on_player_hit"]
 [connection signal="timeout" from="AddEnemyTimer" to="." method="_on_add_enemy_timer_timeout"]
 [connection signal="start_game" from="Hud" to="." method="_on_hud_start_game"]
+[connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]
